@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="../galleria-1.2.8.min.js"></script>
+        <script type="text/javascript">
+            /*
+            $(document).ready(function(){
+                Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
+                Galleria.run('#galleria-img-tag');
+            });
+            $(document).ready(function(){
+                Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
+                Galleria.run('#galleria-media');
+            });
+            $(document).ready(function(){
+                Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
+                var data = [
+                    {
+                        thumb: 'images/image1-200px.jpg',
+                        image: 'images/image1-1600px.jpg',
+                        title: 'Image 1',
+                        description: 'Image 1 description'
+                    },{
+                        thumb: 'images/image2-200px.jpg',
+                        image: 'images/image2-1600px.jpg',
+                        title: 'Image 2',
+                        description: 'Image 2 description'
+                    }];
+                Galleria.run('#galleria-json', {
+                    dataSource: data });
+            });
+            */
+            $(document).ready(function(){
+                Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
+                Galleria.run('#galleria-dataconfig', {
+                    dataConfig: function(img) {
+                        var img = $(img);
+                        return {
+                            thumb: img.data('thumb'),
+                            title: img.parent().next().find('.title').html(),
+                            description: img.parent().next().find('.description').html()
+                        }
+                    }
+                });
+            });
+        </script>
+    </head>
+<body>
+    <div id="galleria-img-tag" style="height: 500px; display: none;">
+        <a href="images/image1-1600px.jpg">
+            <img data-title="Image 1" data-description="Image 1 description"
+                 src="images/image1-200px.jpg" data-link="images/image1-1600px.jpg" />
+        </a>
+        <a href="images/image2-1600px.jpg">
+            <img data-title="Image 2" data-description="Image 2 description"
+                 src="images/image2-200px.jpg" data-link="images/image2-1600px.jpg" />
+        </a>
+        <a href="images/image3-1600px.jpg">
+            <img data-title="Image 3" data-description="Image 3 description"
+                 src="images/image3-200px.jpg" data-link="images/image3-1600px.jpg"
+                 data-image="images/image3-1600px.jpg" />
+        </a>
+    </div>
+    <div id="galleria-media" style="height: 500px; display:none;">
+        <a href="http://www.youtube.com/watch?v=8gSPbmgWr_Y">
+            <img data-title="Youtube video" data-description="Youtube description"
+                 src="http://i3.ytimg.com/i/vC4D8onUfXzvjTOM-dBfEA/1.jpg?v=50aaaeea"
+                 data-link="http://www.youtube.com/watch?v=8gSPbmgWr_Y" />
+        </a>
+    </div>
+    <div id="galleria-json" style="height: 500px; display:none;">
+    </div>
+    <div id="galleria-dataconfig" style="height: 500px;">
+        <dl>
+            <dt><img src="images/image1-1600px.jpg"
+                     data-thumb="images/image1-200px.jpg" /></dt>
+            <dd>
+                <span class="title">Image 1</span>
+                <span class="description">Image 1 Description</span>
+            </dd>
+            <dt><img src="images/image2-1600px.jpg"
+                     data-thumb="images/image2-200px.jpg"/></dt>
+            <dd>
+                <span class="title">Image 2</span>
+                <span class="description">Image 2 Description</span>
+            </dd>
+        </dl>
+    </div>
+</body>
+</html>
