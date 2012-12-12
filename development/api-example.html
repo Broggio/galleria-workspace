@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="../galleria-1.2.8.min.js"></script>
+        <script src="../plugins/flickr/galleria.flickr.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
+                Galleria.run('#galleria', { flickr: 'search:beach' });
+
+                /* Info box manipulation */
+                Galleria.ready(function(options) {
+                    /* show the info box when an image is displayed */
+                    var galleria = this;
+                    galleria.bind('loadfinish', function(e) {
+                        /* bind event when each image is displayed */
+                        var info = $('.galleria-info-text');
+                        var link = $('.galleria-info-link');
+                        var close = $('.galleria-info-close');
+                        info.fadeIn('fast');
+                        link.hide();
+                        close.show();
+                        setTimeout(function(){
+                            /* in 2 seconds, hide again */
+                            info.fadeOut('fast', function(){
+                                link.show();
+                                close.hide();
+                            });
+                        }, 2000);
+                    });
+                });
+
+                /* pause/play button */
+                Galleria.ready(function(options) {
+                    var galleria = this;
+                    var pauseplay = $('<div class="pauseplay" />').insertAfter('.galleria-counter');
+                    if(galleria._options.autoplay){
+                        pauseplay.addClass('playing').html('pause');
+                    }else{
+                        pauseplay.html('play');
+                    }
+                    pauseplay.click(function(){
+                        if(pauseplay.hasClass('playing')){
+                            galleria.pause();
+                            pauseplay.html('play');
+                            pauseplay.removeClass('playing');
+                        }else{
+                            galleria.play();
+                            pauseplay.addClass('playing').html('pause');
+                        }
+                    });
+                });
+
+Galleria.ready(function(options) {
+    var galleria = this;
+    var button = $('<div class="lightbox-btn">Light Box</div>').
+        insertAfter('.galleria-counter');
+    button.click(function(){
+        galleria.openLightbox();
+    });
+});
+            });
+        </script>
+        <style>
+            .pauseplay{
+                position: absolute;
+                bottom: 10px;
+                left: 45px;
+                background-color: #EBEBEB;
+                font: normal 11px/1 arial,sans-serif;
+                color: black;
+                z-index: 1;
+                cursor: pointer;
+                padding: 2px;
+            }
+        </style>
+<style>
+    .lightbox-btn{
+        position: absolute;
+        bottom: 10px;
+        right: 30px;
+        background-color: #EBEBEB;
+        font: normal 11px/1 arial,sans-serif;
+        color: black;
+        z-index: 1;
+        cursor: pointer;
+        padding: 2px;   
+    }
+</style>
+    </head>
+<body>
+    <div id="galleria" style="height: 500px;">
+    </div>
+</body>
+</html>

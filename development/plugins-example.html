@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="../galleria-1.2.8.min.js"></script>
+        <script src="../plugins/flickr/galleria.flickr.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
+                var flickr = new Galleria.Flickr(),
+                    page = 1;
+                flickr.search('beach', function(data) {
+                    Galleria.run('#galleria', { dataSource: data });
+                });
+                Galleria.ready(function(options) {
+                    var galleria = this;
+                    galleria.bind('loadfinish', function(e) {
+                        /* after an image is loaded, check to see how
+                           close we are to loading more images */
+                        if((e.index + 5) > galleria.getDataLength()){
+                            // start loading more images
+                            page += 1;
+                            flickr._find({ text: 'beach', page: page}, function(data) {
+                                galleria.push(data);
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+<body>
+    <div id="galleria" style="height: 500px;">
+    </div>
+</body>
+</html>
