@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="../galleria-1.2.8.min.js"></script>
+        <script type="text/javascript">
+            var getImages = function(from, to){
+                var data = [];
+                for(var i=from; i<to; i++){
+                    data.push({
+                        image: 'images/image' + i + '-1600px.jpg',
+                        thumb: 'images/image' + i + '-200px.jpg',
+                        title: 'Image ' + i,
+                        description: 'Image ' + i + ' Description'
+                    });
+                }
+                return data;
+            }
+            $(document).ready(function(){
+                Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
+                Galleria.run('#galleria', {
+                    dataSource: getImages(1, 3),
+                });
+                Galleria.ready(function(options) {
+                    var galleria = this;
+                    galleria.bind('loadstart', function(e) {
+                        /* after an image starts load, check to see how
+                           close we are to loading more images */
+                        var size = galleria.getDataLength();
+                        if((e.index + 2) > size && size < 10){
+                            galleria.push(getImages(size + 1, size + 3));
+                        }
+                    })
+                });
+            });
+        </script>
+    </head>
+<body>
+    <div id="galleria" style="height: 500px;">
+    </div>
+</body>
+</html>
