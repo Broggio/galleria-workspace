@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="/static/galleria-1.2.8.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                Galleria.loadTheme('/static/themes/classic/galleria.classic.min.js');
+                Galleria.run('#galleria');
+            });
+        </script>
+    </head>
+<body>
+    <div id="galleria" style="height: 500px;">
+        {% for image in images %}
+            <a href="/static/development/images/{{ image['image'] }}">
+                <img src="/static/development/images/{{ image['thumb'] }}" />
+            </a>
+        {% endfor %}
+    </div>
+</body>
+</html>

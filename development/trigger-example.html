@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="../galleria-1.2.8.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#show-gallery').click(function(){
+                    $(this).remove();
+                    $('#galleria').show();
+                    Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
+                    Galleria.run('#galleria');
+                });
+                $('#show-image').click(function(){
+                    var galleria = Galleria.get(0);
+                    if(galleria === undefined){
+                        alert('Galleria not initialized yet.');
+                    }else{
+                        galleria.show(1);
+                    }
+                });
+            });
+        </script>
+    </head>
+<body>
+    <div id="galleria" style="height: 500px; display: none">
+        <a href="images/image1-1600px.jpg">
+            <img data-title="Image 1" data-description="Image 1 description"
+                 src="images/image1-200px.jpg" data-link="images/image1-1600px.jpg" />
+        </a>
+        <a href="images/image2-1600px.jpg">
+            <img data-title="Image 2" data-description="Image 2 description"
+                 src="images/image2-200px.jpg" data-link="images/image2-1600px.jpg" />
+        </a>
+        <a href="images/image3-1600px.jpg">
+            <img data-title="Image 3" data-description="Image 3 description"
+                 src="images/image3-200px.jpg" data-link="images/image3-1600px.jpg" />
+        </a>
+    </div>
+    <a href="#" id="show-gallery">Show Gallery</a> | 
+    <a href="#" id="show-image">Show Image 2</a>
+</body>
+</html>
