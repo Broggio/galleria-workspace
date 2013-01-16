@@ -15,7 +15,7 @@ Galleria.prototype.load = function() {
         return;
     }
 
-    var self = this,
+    var galleria = this,
         facebook = this._options.facebook;
 
     $.ajax({
@@ -30,8 +30,8 @@ Galleria.prototype.load = function() {
                     thumb: _image.picture
                 });
             }
-            self._data = images;
-            self.trigger(Galleria.DATA);
+            galleria._data = images;
+            galleria.trigger(Galleria.DATA);
         }
     });
 };

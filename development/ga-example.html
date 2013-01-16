@@ -3,14 +3,14 @@
     <head>
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <script src="../galleria-1.2.8.min.js"></script>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function(){
                 Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
                 Galleria.run('#galleria');
                 Galleria.ready(function(options) {
                     var galleria = this;
                     galleria.bind('loadstart', function(e) {
-                        var url = $(e.target).find('img').eq(0)[0].src
+                        var url = e.imageTarget.src;
                         var host = window.location.hostname;
                         _gaq.push(['_setCustomVar', 1, "galleryView", "yes", 1]);
                         _gaq.push(['_trackPageview', url.substring(url.indexOf(host) + host.length)]);
@@ -30,7 +30,7 @@
                  src="images/image2-200px.jpg" data-link="images/image2-1600px.jpg" />
         </a>
     </div>
-    <script type="text/javascript">
+    <script>
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', '<CODE>']);
   _gaq.push(['_trackPageview']);

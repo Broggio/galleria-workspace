@@ -3,21 +3,23 @@
     <head>
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <script src="../galleria-1.2.8.min.js"></script>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function(){
-                $('#show-gallery').click(function(){
+                $('#show-gallery').click(function(e){
                     $(this).remove();
                     $('#galleria').show();
                     Galleria.loadTheme('../themes/classic/galleria.classic.min.js');
                     Galleria.run('#galleria');
+                    e.preventDefault();
                 });
-                $('#show-image').click(function(){
+                $('#show-image').click(function(e){
                     var galleria = Galleria.get(0);
                     if(galleria === undefined){
                         alert('Galleria not initialized yet.');
                     }else{
                         galleria.show(1);
                     }
+                    e.preventDefault();
                 });
             });
         </script>
